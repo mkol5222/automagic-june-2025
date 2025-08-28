@@ -1,6 +1,6 @@
 
 resource "azurerm_resource_group" "rg" {
-  name     = var.vnet_name
+  name     = var.vnet_rg
   location = data.azurerm_virtual_hub.vwan_hub.location
 }
 
@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "rg" {
 resource "azurerm_virtual_network" "spoke" {
   name                = var.vnet_name
   location            = data.azurerm_virtual_hub.vwan_hub.location
-  resource_group_name = var.vnet_rg
+  resource_group_name = azurerm_resource_group.rg.name
   address_space       = [var.vnet_address]
 }
 
