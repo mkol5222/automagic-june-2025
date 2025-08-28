@@ -16,7 +16,7 @@ az network virtual-appliance list -o json
 
 az network virtual-appliance list -o json | jq '.[] | .virtualApplianceNics'
 
-terraform destroy -auto-approve -target module.linuxA
+terraform destroy -auto-approve -target module.linux77
 terraform destroy -auto-approve -target module.spoke77
 
 terraform apply -auto-approve -target module.spoke77

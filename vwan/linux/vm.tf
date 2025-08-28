@@ -34,6 +34,19 @@ resource "azurerm_linux_virtual_machine" "linuxvm" {
     public_key = local.ssh_public_key
   }
 
+  custom_data = base64encode(<<-EOF
+    #cloud-config
+    package_update: true
+    package_upgrade: true
+    packages:
+      - nginx
+    runcmd:
+      - systemctl enable nginx
+      - systemctl start nginx
+      - echo "<h1>Welcome to nginx on $(hostname)</h1>" > /var/www/html/index.html
+  EOF
+  )
+
   boot_diagnostics {
     storage_account_uri = azurerm_storage_account.storage.primary_blob_endpoint
   }

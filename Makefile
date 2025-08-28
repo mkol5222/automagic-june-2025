@@ -79,3 +79,7 @@ vw-ssh-2:
 	./scripts/vwan-ssh.sh 2
 vw-ssh:
 	./scripts/vwan-ssh.sh 
+
+
+linux77-ssh:
+	./scripts/linux77-ssh.sh
