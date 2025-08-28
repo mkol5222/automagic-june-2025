@@ -73,4 +73,9 @@ fwoff:
 fwon:
 	./scripts/linux-fwon.sh
 
-	
+vw-ssh-1:
+	./scripts/vwan-ssh.sh 1
+vw-ssh-2:
+	./scripts/vwan-ssh.sh 2
+vw-ssh:
+	./scripts/vwan-ssh.sh 
