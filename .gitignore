@@ -45,3 +45,4 @@ secrets/
 fingerprints.json
 sid.json
 tfstate.json
+vwan/api/.env

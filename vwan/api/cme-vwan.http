@@ -1,0 +1,69 @@
+
+###
+# @name login
+
+POST https://{{$dotenv CHECKPOINT_SERVER}}/web_api/login
+Content-Type: application/json
+
+{
+    "user": "{{$dotenv CHECKPOINT_USERNAME}}",
+    "password": "{{$dotenv CHECKPOINT_PASSWORD}}"
+}
+
+###
+# @name addAzureAccount
+
+POST https://{{$dotenv CHECKPOINT_SERVER}}/web_api/cme-api/v1.2/accounts/azure
+Content-Type: application/json
+X-chkp-sid: {{login.response.body.sid}}
+
+{
+    "name": "myazure",
+    "subscription": "{{$dotenv READER_SUBSCRIPTION_ID}}",
+    "application_id": "{{$dotenv READER_CLIENT_ID}}",
+    "directory_id": "{{$dotenv READER_TENANT_ID}}",
+    "client_secret": "{{$dotenv READER_CLIENT_SECRET}}"
+}
+
+###
+# @name listAzureAccounts
+GET https://{{$dotenv CHECKPOINT_SERVER}}/web_api/cme-api/v1.2/accounts
+Content-Type: application/json
+X-chkp-sid: {{login.response.body.sid}}
+
+###
+# @name newVWamNva
+@azAccount={{$dotenv NVA_AZ_ACCOUNT}}
+@nvaResourceGroup={{$dotenv NVA_RESOURCE_GROUP}}
+@nvaName={{$dotenv NVA_NAME}}
+@nvaPolicy={{$dotenv NVA_POLICY}}
+@nvaSicKey={{$dotenv NVA_SICKEY}}
+
+POST https://{{$dotenv CHECKPOINT_SERVER}}/web_api/v1.8/cme-api/v1.2.1/azure/virtualWANs/accounts/{{azAccount}}/resourceGroups/{{nvaResourceGroup}}/provision/{{nvaName}}
+Content-Type: application/json
+X-chkp-sid: {{login.response.body.sid}}
+
+{
+    "base64_sic_key": "{{nvaSicKey}}",
+    "policy": "{{nvaPolicy}}",
+    "autonomous_threat_prevention": true,
+    "identity_awareness": true
+}
+
+# Got value of **sic-key**, should be of a valid base64-encoded string
+# Error details: {'code': 'generic_err_invalid_parameter', 'message': 'Invalid parameter for [version]. The invalid value [R82] should be replaced by one of the following values: [R75.40 and above]'}
+
+###
+# @name requestStatus
+@requestId={{newVWamNva.response.body.result.request-id}}
+GET https://{{$dotenv CHECKPOINT_SERVER}}/web_api/cme-api/status/{{requestId}}
+Content-Type: application/json
+X-chkp-sid: {{login.response.body.sid}}
+
+### autoprov_cfg show all
+
+###
+# @name getNVAInboundRules
+GET https://{{$dotenv CHECKPOINT_SERVER}}/web_api/v1.8/cme-api/v1.2.1/azure/virtualWANs/accounts/{{azAccount}}/resourceGroups/{{nvaResourceGroup}}/inboundRules/{{nvaName}}
+Content-Type: application/json
+X-chkp-sid: {{login.response.body.sid}}
