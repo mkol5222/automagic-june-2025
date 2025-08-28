@@ -19,3 +19,18 @@ resource "checkpoint_management_network" "net-linux" {
   subnet4 = "10.114.1.0"
   tags    = ["a","b","MadeByTerraform","z"]
 }
+
+resource "checkpoint_management_network" "vnet77" {
+  name         = "net_vnet77"
+  subnet4      = "10.77.0.0"
+  mask_length4 = 16
+
+  nat_settings = {
+    "auto_rule"   = "true"
+    "hide_behind" = "gateway"
+    "install_on"  = "All"
+    "method"      = "hide"
+  }
+
+  tags    = ["MadeByTerraform"]
+}
