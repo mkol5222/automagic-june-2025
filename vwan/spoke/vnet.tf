@@ -25,4 +25,6 @@ resource "azurerm_virtual_hub_connection" "spoke_to_hub" {
   name                      = "conn-${var.vnet_name}-to-hub"
   virtual_hub_id            = data.azurerm_virtual_hub.vwan_hub.id
   remote_virtual_network_id = azurerm_virtual_network.spoke.id
+
+  internet_security_enabled = true
 }

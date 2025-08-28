@@ -18,11 +18,11 @@ resource "azurerm_route_table" "linux-rt" {
     next_hop_type  = "Internet"
   }
 
-  route {
-    name           = "to-internet"
-    address_prefix = "0.0.0.0/0"
-    next_hop_type  = "Internet"
-  }
+#   route {
+#     name           = "to-internet"
+#     address_prefix = "0.0.0.0/0"
+#     next_hop_type  = "Internet"
+#   }
   
 
   
