@@ -7,5 +7,4 @@ module "spoke77" {
   vnet_rg             = "vnet_rg77"
   vwan_hub_rg        = "automagic-vwan-ffeb4275"
   vwan_hub_name      = "am-vwan-hub"
-  
 }

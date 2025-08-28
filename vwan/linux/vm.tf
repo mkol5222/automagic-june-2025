@@ -1,0 +1,52 @@
+
+resource "azurerm_resource_group" "linux" {
+    name     = var.linux_rg_name
+    location = var.linux_location
+}
+
+resource "azurerm_linux_virtual_machine" "linuxvm" {
+  name                  = var.vm_name
+  location              = azurerm_resource_group.linux.location
+  resource_group_name   = azurerm_resource_group.linux.name
+  network_interface_ids = [azurerm_network_interface.nic.id]
+
+  size                  = var.vm_size
+
+  os_disk {
+    name                 = "${var.vm_name}-myOsDisk"
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "Canonical"
+    offer = "0001-com-ubuntu-server-jammy"
+    sku = "22_04-lts"
+    version   = "latest"
+  }
+
+  computer_name                   = var.vm_name
+  admin_username                  = "azureuser"
+  disable_password_authentication = true
+
+  admin_ssh_key {
+    username   = "azureuser"
+    public_key = local.ssh_public_key
+  }
+
+  boot_diagnostics {
+    storage_account_uri = azurerm_storage_account.storage.primary_blob_endpoint
+  }
+  lifecycle {
+    ignore_changes = [
+      # Ignore changes to tags, e.g. because a management agent
+      # updates these based on some ruleset managed elsewhere.
+      tags,
+    ]
+  }
+
+  tags = {
+    app = "linux1"
+  }
+
+}
