@@ -107,11 +107,11 @@ resource "checkpoint_management_access_rule" "codespace" {
 }
 
 resource "checkpoint_management_access_rule" "linux77" {
-  name        = "linux 77 access from Internet"
+  name        = "linux77 (vwanlbip) access from Internet"
   layer       = "${checkpoint_management_package.vmss.name} Network"
   position    = { below = checkpoint_management_access_rule.codespace.id }
   source      = ["Any"]
-  destination = [checkpoint_management_host.linux77.id]
+  destination = [checkpoint_management_host.vwanlbip.id]
   service     = ["https", "ssh", "http"]
   content     = ["Any"]
   time        = ["Any"]
