@@ -39,3 +39,17 @@ az network vhub connection list \
 # AllowHubToRemoteVnetTransit    AllowRemoteVnetToUseHubVnetGateways    EnableInternetSecurity    Name                  ProvisioningState    ResourceGroup
 # -----------------------------  -------------------------------------  ------------------------  --------------------  -------------------  -----------------------
 # True                           True                                   True                      conn-myVNet77-to-hub  Succeeded            automagic-vwan-ffeb4275
+
+az network vhub connection list \
+    --vhub-name  am-vwan-hub \
+    --resource-group automagic-vwan-ffeb4275 \
+    --output json
+
+# list all vnets
+az network vnet list --output table
+
+# list all VMs
+az vm list --output table
+
+# in TF
+terraform apply -auto-approve -target module.assets ; cat /tmp/vwan.json | jq .
