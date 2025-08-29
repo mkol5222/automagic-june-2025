@@ -56,6 +56,8 @@ X-chkp-sid: {{login.response.body.sid}}
 ###
 # @name requestStatus
 @requestId={{newVWamNva.response.body.result.request-id}}
+
+
 GET https://{{$dotenv CHECKPOINT_SERVER}}/web_api/cme-api/status/{{requestId}}
 Content-Type: application/json
 X-chkp-sid: {{login.response.body.sid}}
@@ -67,3 +69,35 @@ X-chkp-sid: {{login.response.body.sid}}
 GET https://{{$dotenv CHECKPOINT_SERVER}}/web_api/v1.8/cme-api/v1.2.1/azure/virtualWANs/accounts/{{azAccount}}/resourceGroups/{{nvaResourceGroup}}/inboundRules/{{nvaName}}
 Content-Type: application/json
 X-chkp-sid: {{login.response.body.sid}}
+
+###
+# @name setNVAInboundRules
+POST https://{{$dotenv CHECKPOINT_SERVER}}/web_api/v1.8/cme-api/v1.2.1/azure/virtualWANs/accounts/{{azAccount}}/resourceGroups/{{nvaResourceGroup}}/inboundRules/{{nvaName}}
+Content-Type: application/json
+X-chkp-sid: {{login.response.body.sid}}
+
+{
+  "rules": [
+    {
+      "name": "web_linux77",
+      "original_source": "0.0.0.0/0",
+      "lb_public_ips": [
+        "20.166.49.142"
+      ],
+      "original_ports": [
+        "80","443"
+      ],
+      "protocol": "TCP"
+    }
+  ]
+}
+
+###
+# @name requestStatusInbound
+@requestId={{setNVAInboundRules.response.body.result.request-id}}
+
+
+GET https://{{$dotenv CHECKPOINT_SERVER}}/web_api/cme-api/status/{{requestId}}
+Content-Type: application/json
+X-chkp-sid: {{login.response.body.sid}}
+###
