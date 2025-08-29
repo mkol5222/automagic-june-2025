@@ -28,4 +28,14 @@ resource "checkpoint_management_nat_rule" "rule110" {
   method = "hide"
 }
 
+resource "checkpoint_management_nat_rule" "rule120" {
+  package = "${checkpoint_management_package.vmss.name}"
+  position = {below = checkpoint_management_nat_rule.rule110.id}
+  name = "Incoming NAT for Linux77 web"
+  original_source = "All_Internet"
+  original_destination = checkpoint_management_host.vwanlbip.id
+  original_service = "HTTPS"
+  translated_source = checkpoint_management_dynamic_object.LocalGatewayInternal.id
+  method = "static"
+}
 # HIDE NAT Internal Networks Group All Internet Any LocalGatewayExternal Original Original
