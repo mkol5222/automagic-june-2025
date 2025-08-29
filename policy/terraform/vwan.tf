@@ -5,3 +5,10 @@ resource "checkpoint_management_host" "vwanlbip" {
   tags        = ["Joking_NotReallyMadeByTerraform"]
   comments     = "vWAN NVAs FrontEnd Load Balancer IP"
 }
+
+resource "checkpoint_management_host" "linux77" {
+  name         = "linux77"
+  ipv4_address = "10.77.1.4"
+  color        = "blue"
+
+}

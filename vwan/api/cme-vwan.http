@@ -85,7 +85,7 @@ X-chkp-sid: {{login.response.body.sid}}
         "20.166.49.142"
       ],
       "original_ports": [
-        "80","443"
+        "80","443","22"
       ],
       "protocol": "TCP"
     }

@@ -88,7 +88,31 @@ resource "checkpoint_management_access_rule" "codespace" {
   position    = { below = checkpoint_management_access_section.vmss_inbound.id }
   source      = [checkpoint_management_host.codespace.name]
   destination = ["Any"]
-  service     = ["https", "ssh"]
+  service     = ["https", "ssh", "http"]
+  content     = ["Any"]
+  time        = ["Any"]
+  install_on  = ["Policy Targets"]
+  track = {
+    type                    = "Log"
+    accounting              = false
+    alert                   = "none"
+    enable_firewall_session = false
+    per_connection          = true
+    per_session             = false
+  }
+  action_settings = {}
+  custom_fields   = {}
+  vpn             = "Any"
+  action          = "Accept"
+}
+
+resource "checkpoint_management_access_rule" "linux77" {
+  name        = "linux 77 access from Internet"
+  layer       = "${checkpoint_management_package.vmss.name} Network"
+  position    = { below = checkpoint_management_access_rule.codespace.id }
+  source      = ["Any"]
+  destination = [checkpoint_management_host.linux77.id]
+  service     = ["https", "ssh", "http"]
   content     = ["Any"]
   time        = ["Any"]
   install_on  = ["Policy Targets"]

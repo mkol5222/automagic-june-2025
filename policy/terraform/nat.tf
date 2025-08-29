@@ -29,13 +29,40 @@ resource "checkpoint_management_nat_rule" "rule110" {
 }
 
 resource "checkpoint_management_nat_rule" "rule120" {
+   
   package = "${checkpoint_management_package.vmss.name}"
   position = {below = checkpoint_management_nat_rule.rule110.id}
-  name = "Incoming NAT for Linux77 web"
+  name = "Incoming NAT for Linux77 web HTTPS"
   original_source = "All_Internet"
   original_destination = checkpoint_management_host.vwanlbip.id
   original_service = "HTTPS"
   translated_source = checkpoint_management_dynamic_object.LocalGatewayInternal.id
-  method = "static"
+  translated_destination = checkpoint_management_host.linux77.id
+  method = "hide"
+}
+resource "checkpoint_management_nat_rule" "rule125" {
+    
+  package = "${checkpoint_management_package.vmss.name}"
+  position = {below = checkpoint_management_nat_rule.rule120.id}
+  name = "Incoming NAT for Linux77 web HTTP"
+  original_source = "All_Internet"
+  original_destination = checkpoint_management_host.vwanlbip.id
+  original_service = "HTTP"
+  translated_source = checkpoint_management_dynamic_object.LocalGatewayInternal.id
+  translated_destination = checkpoint_management_host.linux77.id
+  method = "hide"
+}
+
+resource "checkpoint_management_nat_rule" "rule129" {
+    
+  package = "${checkpoint_management_package.vmss.name}"
+  position = {below = checkpoint_management_nat_rule.rule125.id}
+  name = "Incoming NAT for Linux77 SSH"
+  original_source = "All_Internet"
+  original_destination = checkpoint_management_host.vwanlbip.id
+  original_service = "SSH"
+  translated_source = checkpoint_management_dynamic_object.LocalGatewayInternal.id
+  translated_destination = checkpoint_management_host.linux77.id
+  method = "hide"
 }
 # HIDE NAT Internal Networks Group All Internet Any LocalGatewayExternal Original Original
