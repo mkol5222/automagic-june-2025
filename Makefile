@@ -84,6 +84,8 @@ vw-ssh:
 
 linux77-ssh:
 	./scripts/linux77-ssh.sh
+linux68-ssh:
+	./scripts/linux68-ssh.sh
 
 vwan-up:
 	./scripts/vwan-up.sh

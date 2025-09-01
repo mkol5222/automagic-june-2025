@@ -76,6 +76,60 @@ resource "checkpoint_management_access_rule" "app_linux1_internet" {
   action          = "Accept"
 }
 
+resource "checkpoint_management_access_section" "e_w" {
+  name     = "East-West: VNET to VNET (spoke to spoke)"
+  position = { top = "top" }
+  layer    = "${checkpoint_management_package.vmss.name} Network"
+}
+
+resource "checkpoint_management_access_rule" "vnet68to77" {
+  name        = "VNET 68 to 77"
+  layer       = "${checkpoint_management_package.vmss.name} Network"
+  position    = { below = checkpoint_management_access_section.e_w.id }
+  source      = [checkpoint_management_network.spoke68.name]
+  destination = [checkpoint_management_network.spoke77.name]
+  service     = ["Any"]
+  content     = ["Any"]
+  time        = ["Any"]
+  install_on  = ["Policy Targets"]
+  track = {
+    type                    = "Log"
+    accounting              = false
+    alert                   = "none"
+    enable_firewall_session = false
+    per_connection          = true
+    per_session             = false
+  }
+  action_settings = {}
+  custom_fields   = {}
+  vpn             = "Any"
+  action          = "Accept"
+}
+
+resource "checkpoint_management_access_rule" "vnet77to68" {
+  name        = "VNET 77 to 68"
+  layer       = "${checkpoint_management_package.vmss.name} Network"
+  position    = { below = checkpoint_management_access_section.e_w.id }
+  source      = [checkpoint_management_network.spoke77.name]
+  destination = [checkpoint_management_network.spoke68.name]
+  service     = ["Any"]
+  content     = ["Any"]
+  time        = ["Any"]
+  install_on  = ["Policy Targets"]
+  track = {
+    type                    = "Log"
+    accounting              = false
+    alert                   = "none"
+    enable_firewall_session = false
+    per_connection          = true
+    per_session             = false
+  }
+  action_settings = {}
+  custom_fields   = {}
+  vpn             = "Any"
+  action          = "Accept"
+}
+
 resource "checkpoint_management_access_section" "vmss_inbound" {
   name     = "VMSS Inbound"
   position = { top = "top" }

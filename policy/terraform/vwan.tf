@@ -34,6 +34,7 @@ resource "checkpoint_management_network" "spoke77" {
   subnet4      = "10.77.0.0"
   mask_length4 = 16
   tags    = ["MadeByTerraform"]
+  ignore_warnings = true
 }
 
 
