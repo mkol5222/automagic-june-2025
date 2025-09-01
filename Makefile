@@ -114,3 +114,10 @@ waf-ssh:
 
 vwan-down:
 	./scripts/vwan-down.sh
+
+vwan-spoke68-down:
+	./scripts/vwan-spoke68-down.sh
+
+
+vwan-spoke77-down:
+	./scripts/vwan-spoke77-down.sh
