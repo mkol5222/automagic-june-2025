@@ -40,10 +40,17 @@ resource "azurerm_linux_virtual_machine" "linuxvm" {
 
   computer_name = var.vm_name
   admin_username                  =  "azureuser"
-  disable_password_authentication = true
+  # disable_password_authentication = true
+#   # admin_ssh_key {
+#   #   username   = "admin"
+#   #   public_key = file("~/.ssh/id_rsa.pub")
+#   # }
 
+#   # allow using password
+  admin_password                  = "Welcome@Home#1984"
+  disable_password_authentication = false
   admin_ssh_key {
-    username   = "admin"
+    username   = "azureuser"
     public_key = local.ssh_public_key
   }
 

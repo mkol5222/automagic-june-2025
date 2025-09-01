@@ -1,6 +1,15 @@
-resource "checkpoint_management_host" "vwanlbip" {
-  name         = "vwanlbip"
-  ipv4_address = "20.223.168.168" # PIP am-vwan-nva-ipIngress
+  resource "checkpoint_management_host" "vwanlbip" {
+    name         = "vwanlbip"
+    ipv4_address = "20.223.168.168" # PIP am-vwan-nva-ipIngress
+    color        = "red"
+    tags        = ["Joking_NotReallyMadeByTerraform"]
+    comments     = "vWAN NVAs FrontEnd Load Balancer IP"
+  }
+
+# 20.166.17.164 WAF IP on wVAN LB
+resource "checkpoint_management_host" "vwan-waf-lbip" {
+  name         = "vwan-waf-lbip"
+  ipv4_address = "20.166.17.164" # PIP am-vwan-nva-ipIngress
   color        = "red"
   tags        = ["Joking_NotReallyMadeByTerraform"]
   comments     = "vWAN NVAs FrontEnd Load Balancer IP"
@@ -13,6 +22,12 @@ resource "checkpoint_management_host" "linux77" {
 
 }
 
+resource "checkpoint_management_host" "waf77" {
+  name         = "waf77"
+  ipv4_address = "10.77.1.5"
+  color        = "blue"
+
+}
 
 resource "checkpoint_management_host" "linux68" {
   name         = "linux68"
