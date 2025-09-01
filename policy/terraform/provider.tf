@@ -9,5 +9,5 @@ terraform {
 
 provider "checkpoint" {
   # Configuration options
-
+  auto_publish_batch_size = 10
 }
