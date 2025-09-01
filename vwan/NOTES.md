@@ -85,3 +85,14 @@ echo -n VP1hJ2q5UtsZ8ddp | base64 -w0
 
 # 6) Back
 # 7) Exit (or Ctrl + C)
+
+
+####
+
+# LB PIP
+
+az network public-ip show \
+  --name am-vwan-nva-ipIngress \
+  --resource-group am-vwan-nva-rg-ffeb4275 \
+  --query "ipAddress" \
+  -o tsv
