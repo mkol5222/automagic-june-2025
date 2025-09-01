@@ -18,6 +18,8 @@ sp-login: login-sp
 login-sp:
 	./scripts/login-sp.sh
 
+reader-check: check-reader
+reader-test: check-reader
 check-reader:
 	./scripts/check-reader.sh
 
