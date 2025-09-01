@@ -82,7 +82,7 @@ X-chkp-sid: {{login.response.body.sid}}
       "name": "web_linux77",
       "original_source": "0.0.0.0/0",
       "lb_public_ips": [
-        "20.166.49.142"
+        "{{$dotenv LB_IP}}"
       ],
       "original_ports": [
         "80","443","22"

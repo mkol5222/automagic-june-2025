@@ -5,7 +5,7 @@ module "spoke77" {
   vnet_address        = "10.77.0.0/16"
   vnet_name           = "myVNet77"
   vnet_rg             = "vnet_rg77"
-  vwan_hub_rg        = "automagic-vwan-ffeb4275"
+  vwan_hub_rg        = "automagic-vwan-${local.secrets.envId}"
   vwan_hub_name      = "am-vwan-hub"
 }
 

@@ -13,3 +13,7 @@ NVA_NAME=am-vwan-nva
 NVA_POLICY=vmss
 # base64 encoded! - echo -n realsic | base -w0
 NVA_SICKEY="VlAxaEoycTVVdHNaOGRkcA=="
+
+# inbound rules
+# az network public-ip show --name am-vwan-nva-ipIngress --resource-group am-vwan-nva-rg-ffeb4275 --query "ipAddress" -o tsv
+LB_IP="real lb ip"
