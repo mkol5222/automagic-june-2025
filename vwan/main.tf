@@ -18,7 +18,7 @@ module "vwan" {
     vwan-hub-name                   = "am-vwan-hub"
     vwan-hub-address-prefix         = "10.0.0.0/16"
     managed-app-name                = "am-vwan-managed-app-nva"
-    nva-rg-name                     = "am-vwan-nva-rg-${local.secrets.envId}"
+    nva-rg-name                     = "automagic-vwan-nva-${local.secrets.envId}"
     nva-name                        = "am-vwan-nva"
     os-version                      = "R82"
     license-type                    = "Security Enforcement (NGTP)"

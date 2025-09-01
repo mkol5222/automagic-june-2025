@@ -105,4 +105,9 @@ echo $LBIP
 make cpman-ssh
 export LBIP=20.223.168.168
 mgmt_cli -r true --format json set host name vwanlbip ipv4-address "$LBIP"
-mgmt-cl
+
+
+###
+while true; do ((cd vwan; terraform state list) | while read R; do (cd vwan; terraform destroy -auto-approve -target "$R";) done; sleep 5; ); done
+
+# vyskoceni ze smycky, az nic nezbude je na Ctrl-C ;-)
