@@ -106,10 +106,16 @@ X-chkp-sid: {{login.response.body.sid}}
   ]
 }
 
+
 ###
-# @name requestStatusInbound
+# @name requestStatusInboundWAF
 @requestId={{setNVAInboundRules.response.body.result.request-id}}
 
+
+GET https://{{$dotenv CHECKPOINT_SERVER}}/web_api/cme-api/status/{{requestId}}
+Content-Type: application/json
+X-chkp-sid: {{login.response.body.sid}}
+###
 
 
 ###
@@ -150,6 +156,27 @@ X-chkp-sid: {{login.response.body.sid}}
 ###
 # @name requestStatusInboundWAF
 @requestId={{setNVAInboundRulesWithWAF.response.body.result.request-id}}
+
+
+GET https://{{$dotenv CHECKPOINT_SERVER}}/web_api/cme-api/status/{{requestId}}
+Content-Type: application/json
+X-chkp-sid: {{login.response.body.sid}}
+###
+
+
+###
+# @name setNVAInboundRulesNone
+POST https://{{$dotenv CHECKPOINT_SERVER}}/web_api/v1.8/cme-api/v1.2.1/azure/virtualWANs/accounts/{{azAccount}}/resourceGroups/{{nvaResourceGroup}}/inboundRules/{{nvaName}}
+Content-Type: application/json
+X-chkp-sid: {{login.response.body.sid}}
+
+{
+  "rules": []
+}
+
+###
+# @name requestStatusInboundWAF
+@requestId={{setNVAInboundRulesNone.response.body.result.request-id}}
 
 
 GET https://{{$dotenv CHECKPOINT_SERVER}}/web_api/cme-api/status/{{requestId}}
