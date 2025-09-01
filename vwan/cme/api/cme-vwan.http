@@ -26,6 +26,20 @@ X-chkp-sid: {{login.response.body.sid}}
 }
 
 ###
+# @name setAzureAccount
+ 
+PUT https://{{$dotenv CHECKPOINT_SERVER}}/web_api/cme-api/v1.2/accounts/azure/myazure
+Content-Type: application/json
+X-chkp-sid: {{login.response.body.sid}}
+ 
+{
+    "subscription": "{{$dotenv READER_SUBSCRIPTION_ID}}",
+    "application_id": "{{$dotenv READER_CLIENT_ID}}",
+    "directory_id": "{{$dotenv READER_TENANT_ID}}",
+    "client_secret": "{{$dotenv READER_CLIENT_SECRET}}"
+}
+
+###
 # @name listAzureAccounts
 GET https://{{$dotenv CHECKPOINT_SERVER}}/web_api/cme-api/v1.2/accounts
 Content-Type: application/json

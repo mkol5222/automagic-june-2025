@@ -14,6 +14,6 @@ module "spoke68" {
   vnet_address        = "10.68.0.0/16"
   vnet_name           = "myVNet68"
   vnet_rg             = "vnet_rg68"
-  vwan_hub_rg        = "automagic-vwan-ffeb4275"
+  vwan_hub_rg        = "automagic-vwan-${local.secrets.envId}"
   vwan_hub_name      = "am-vwan-hub"
 }
