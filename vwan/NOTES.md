@@ -96,3 +96,13 @@ az network public-ip show \
   --resource-group am-vwan-nva-rg-ffeb4275 \
   --query "ipAddress" \
   -o tsv
+
+mgmt_cli -r true --format json show host name vwanlbip
+
+LBIP=$(az network public-ip show --name am-vwan-nva-ipIngress --resource-group am-vwan-nva-rg-ffeb4275 --query "ipAddress" -o tsv)
+echo $LBIP
+
+make cpman-ssh
+export LBIP=20.223.168.168
+mgmt_cli -r true --format json set host name vwanlbip ipv4-address "$LBIP"
+mgmt-cl
