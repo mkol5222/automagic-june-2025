@@ -2,6 +2,17 @@
 
 set -euo pipefail
 
+# if ./secrets/.env-cmeapi exists, load env
+if [ -f ./secrets/.env-cmeapi ]; then
+  source ./secrets/.env-cmeapi
+fi
+# is LB_IP defined?
+if [ -z "${LB_IP+x}" ]; then
+  echo "LB_IP is not defined"
+else 
+    export TF_VAR_vwanlbip="$LB_IP"
+fi
+
 export CHECKPOINT_SESSION_NAME="TF $(whoami) $(date) from $(hostname)"
 export CHECKPOINT_SESSION_DESCRIPTION="Terraform session description"
 

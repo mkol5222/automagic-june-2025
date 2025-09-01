@@ -1,6 +1,12 @@
+  variable "vwanlbip" {
+    description = "vWAN Load Balancer IP"
+    type        = string
+    default     = "194.228.2.1"
+  }
+
   resource "checkpoint_management_host" "vwanlbip" {
     name         = "vwanlbip"
-    ipv4_address = "20.223.168.168" # PIP am-vwan-nva-ipIngress
+    ipv4_address = var.vwanlbip
     color        = "red"
     tags        = ["Joking_NotReallyMadeByTerraform"]
     comments     = "vWAN NVAs FrontEnd Load Balancer IP"

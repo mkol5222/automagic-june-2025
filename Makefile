@@ -109,7 +109,7 @@ vwan-spoke77-up: vwan-spoke77
 vwan-spoke68-up:
 	./scripts/vwan-spoke68-up.sh
 vwan-spoke68: vwan-spoke68-up
-
+vwan-spokes-up: vwan-spoke68-up vwan-spoke77-up
 
 waf-ssh:
 	./scripts/waf-ssh.sh
