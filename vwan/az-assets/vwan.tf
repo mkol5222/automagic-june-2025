@@ -4,7 +4,7 @@
 
 data "azurerm_virtual_hub" "lab" {
   name                = "am-vwan-hub"
-  resource_group_name = "automagic-vwan-ffeb4275"
+  resource_group_name = "automagic-vwan-${local.secrets.envId}"
 }
 
 # data "azurerm_virtual_network" "vnet77" {
