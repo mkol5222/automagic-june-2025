@@ -9,4 +9,5 @@
 - [x] RG naming automagic-
 - [ ] include vWAN WAF VM in deployment
 - [ ] reference vWAN HUB by API call and not by data resource by name or research dependency of modules
+- [ ] vWAN HUB routing intent managed with make/script
 
