@@ -111,3 +111,6 @@ vwan-spoke68: vwan-spoke68-up
 
 waf-ssh:
 	./scripts/waf-ssh.sh
+
+vwan-down:
+	./scripts/vwan-down.sh
