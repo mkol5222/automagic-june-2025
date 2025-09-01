@@ -49,6 +49,13 @@ function addAccount() {
       "directory_id": "'"$READER_TENANT_ID"'",
       "client_secret": "'"$READER_CLIENT_SECRET"'"
   }' -s)
+  # echo '{
+  #     "name": "myazure",
+  #     "subscription": "'"$READER_SUBSCRIPTION_ID"'",
+  #     "application_id": "'"$READER_CLIENT_ID"'",
+  #     "directory_id": "'"$READER_TENANT_ID"'",
+  #     "client_secret": "'"$READER_CLIENT_SECRET"'"
+  # }' >&2
   echo "$RESP_ADD_ACC"
 
 #   {
@@ -115,7 +122,7 @@ function listAccounts() {
 #     "identity_awareness": true
 # }
 function addAzureNVAs() {
-    RESP_ADD_NVA=$(curl -k -X POST "https://$CHECKPOINT_SERVER/web_api/v1.8/cme-api/v1.2.1/azure/virtualWANs/accounts/myazure/resourceGroups/myResourceGroup/provision/myNva" \
+    RESP_ADD_NVA=$(curl -k -X POST "https://$CHECKPOINT_SERVER/web_api/v1.8/cme-api/v1.2.1/azure/virtualWANs/accounts/myazure/resourceGroups/${NVA_RESOURCE_GROUP}/provision/$NVA_NAME" \
     -H "Content-Type: application/json" \
     -H "X-chkp-sid: $SID" \
     -d '{
@@ -155,6 +162,7 @@ ADDNVARES=$(addAzureNVAs)
 ADDNVARES_REQID=$(echo "$ADDNVARES" | jq -r '.result."request-id"')
 echo "ADDNVARES: >>>$ADDNVARES<<<"
 echo
-sleep 5
+echo "waiting for NVAs to be added..."
+sleep 10
 echo "Checking status of $ADDNVARES_REQID"
 checkStatus "$ADDNVARES_REQID"
