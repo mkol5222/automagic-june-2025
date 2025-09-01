@@ -123,3 +123,5 @@ vwan-spoke68-down:
 
 vwan-spoke77-down:
 	./scripts/vwan-spoke77-down.sh
+
+vwan-spokes-down: vwan-spoke68-down vwan-spoke77-down

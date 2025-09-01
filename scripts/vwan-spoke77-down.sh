@@ -10,4 +10,4 @@ fi
 
 (cd vwan; terraform init)
 (cd vwan; terraform destroy -auto-approve -target module.linux77)
-(cd vwan; terraform destroy -auto-approve -target module.spoke68)
+(cd vwan; terraform destroy -auto-approve -target module.spoke77)
