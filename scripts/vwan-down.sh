@@ -8,8 +8,7 @@ if [ ! -f ~/.ssh/id_rsa.pub ]; then
   ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
 fi
 
-(cd vwan; terraform init)
 
-(cd vwan; terraform apply -auto-approve)
 
-(cd vwan; terraform output -json)
+(cd vwan; terraform destroy -auto-approve)
+
