@@ -11,13 +11,15 @@ READER_TENANT_ID=$(cat ./secrets/reader.json | jq -r .tenant)
 READER_CLIENT_SECRET=$(cat ./secrets/reader.json | jq -r .password)
 
 # if no ./secrets/vwan-nva-sic.txt
-if [ ! -f ./secrets/vwan-nva-sic.txt ]; then
-  echo "SIC key file not found! (./secrets/vwan-nva-sic.txt) Deploy vWAN ('time make vwan-up') first."
-  exit 1
-fi
+SICKEY=$((cd vwan; terraform output -json) | jq -r .sic_key.value)
+# if [ ! -f ./secrets/vwan-nva-sic.txt ]; then
+#   echo "SIC key file not found! (./secrets/vwan-nva-sic.txt) Deploy vWAN ('time make vwan-up') first."
+#   exit 1
+# fi
 
-SICKEY=$(cat ./secrets/vwan-nva-sic.txt)
+# SICKEY=$(cat ./secrets/vwan-nva-sic.txt)
 SICKEYB64=$(echo -n "$SICKEY" | base64 -w0)
+echo "Encoded SIC key: $SICKEYB64"
 
 # is there management aka cpman? look for az rg named automagic-cpman-$ENVID
 if az group show --name "automagic-management-${ENVID}" > /dev/null 2>&1; then

@@ -10,6 +10,6 @@ fi
 
 (cd vwan; terraform init)
 
-(cd vwan; terraform apply -auto-approve -target module.vwan)
+(cd vwan; terraform apply -auto-approve -target module.vwan -target lcoal_file.vwan_nva_sic)
 
 (cd vwan; terraform output -json)
