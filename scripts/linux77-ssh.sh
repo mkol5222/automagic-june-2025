@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # public IP of VM linux77 in RG linux77-rg
-IP=$(az vm show -d -g linux77-rg -n linux77 --query publicIps -o tsv)
+IP=$(az vm show -d -g  automagic-linux77-rg -n linux77 --query publicIps -o tsv)
 echo "IP:$IP|"
 # not valid IP
 if [ -z "$IP" ]; then

@@ -78,7 +78,7 @@ resource "checkpoint_management_access_rule" "app_linux1_internet" {
 
 resource "checkpoint_management_access_section" "e_w" {
   name     = "East-West: VNET to VNET (spoke to spoke)"
-  position = { top = "top" }
+  position = { above = checkpoint_management_access_section.vmss_outbound.id }
   layer    = "${checkpoint_management_package.vmss.name} Network"
 }
 

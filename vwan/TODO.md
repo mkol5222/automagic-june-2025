@@ -10,4 +10,6 @@
 - [ ] include vWAN WAF VM in deployment
 - [ ] reference vWAN HUB by API call and not by data resource by name or research dependency of modules
 - [ ] vWAN HUB routing intent managed with make/script
+- [ ] HTTPS on Linux in vWAN spokes
+- [ ] SP Reader(CME) permissions to manage vWAN LB for CME
 
