@@ -46,3 +46,4 @@ fingerprints.json
 sid.json
 tfstate.json
 vwan/api/.env
+vwan/cme/api/.env

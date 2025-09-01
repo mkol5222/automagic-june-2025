@@ -14,6 +14,7 @@ down:
 slides:
 	./scripts/slides.sh
 
+sp-login: login-sp
 login-sp:
 	./scripts/login-sp.sh
 
@@ -83,3 +84,20 @@ vw-ssh:
 
 linux77-ssh:
 	./scripts/linux77-ssh.sh
+
+vwan-up:
+	./scripts/vwan-up.sh
+vwan-ssh:
+	./scripts/vwan-ssh.sh
+vwan-ssh-1:
+	./scripts/vwan-ssh.sh 1
+vwan-ssh-2:
+	./scripts/vwan-ssh.sh 2
+vwan-ssh-a:
+	./scripts/vwan-ssh.sh 1
+vwan-ssh-b:
+	./scripts/vwan-ssh.sh 2
+
+vwan-spoke77:
+	./scripts/vwan-spoke77-up.sh
+vwan-spoke77-up: vwan-spoke77

@@ -53,3 +53,35 @@ az vm list --output table
 
 # in TF
 terraform apply -auto-approve -target module.assets ; cat /tmp/vwan.json | jq .
+
+##
+# SIC key to base64
+echo -n VP1hJ2q5UtsZ8ddp | base64 -w0
+
+### CME cme_menu
+
+
+# Enter Selection: 1
+
+
+# Welcome To Cloud Guard CME in Azure Configuration
+# 1) Automatic Hotfix Deployment
+# 2) vWAN
+
+
+# 3) Back
+# 4) Exit (or Ctrl + C)
+
+# Enter Selection: 2
+
+
+# Welcome To vWAN automatic configuration script
+# 1) Configure NVA gateways on management server
+# 2) Show Metering Overview
+# 3) Export Metering Data
+# 4) Configure Metering for NVAs
+# 5) Configure Ingress Rules (Preview)
+
+
+# 6) Back
+# 7) Exit (or Ctrl + C)
