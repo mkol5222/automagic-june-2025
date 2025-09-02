@@ -66,6 +66,19 @@ resource "checkpoint_management_nat_rule" "rule126" {
   method = "hide"
 }
 
+resource "checkpoint_management_nat_rule" "rule127" {
+    
+  package = "${checkpoint_management_package.vmss.name}"
+  position = {below = checkpoint_management_nat_rule.rule120.id}
+  name = "Incoming NAT for Linux69 web HTTP"
+  original_source = "All_Internet"
+  original_destination = checkpoint_management_host.linux69lbpip.id
+  original_service = "HTTP"
+  translated_source = checkpoint_management_dynamic_object.LocalGatewayInternal.id
+  translated_destination = checkpoint_management_host.linux69.id
+  method = "hide"
+}
+
 resource "checkpoint_management_nat_rule" "rule129" {
     
   package = "${checkpoint_management_package.vmss.name}"

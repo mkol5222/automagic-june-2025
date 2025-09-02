@@ -17,3 +17,12 @@ module "spoke68" {
   vwan_hub_rg        = "automagic-vwan-${local.secrets.envId}"
   vwan_hub_name      = "am-vwan-hub"
 }
+
+module "spoke69" {
+  source              = "./spoke"
+  vnet_address        = "10.69.0.0/16"
+  vnet_name           = "myVNet69"
+  vnet_rg             = "automagic-vnet_rg69"
+  vwan_hub_rg        = "automagic-vwan-${local.secrets.envId}"
+  vwan_hub_name      = "am-vwan-hub"
+}

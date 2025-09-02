@@ -160,6 +160,30 @@ resource "checkpoint_management_access_rule" "codespace" {
   action          = "Accept"
 }
 
+resource "checkpoint_management_access_rule" "linux69" {
+  name        = "linux69 (linux69lbpip) access from Internet"
+  layer       = "${checkpoint_management_package.vmss.name} Network"
+  position    = { below = checkpoint_management_access_rule.codespace.id }
+  source      = ["Any"]
+  destination = [checkpoint_management_host.linux69lbpip.id]
+  service     = ["https", "http"]
+  content     = ["Any"]
+  time        = ["Any"]
+  install_on  = ["Policy Targets"]
+  track = {
+    type                    = "Log"
+    accounting              = false
+    alert                   = "none"
+    enable_firewall_session = false
+    per_connection          = true
+    per_session             = false
+  }
+  action_settings = {}
+  custom_fields   = {}
+  vpn             = "Any"
+  action          = "Accept"
+}
+
 resource "checkpoint_management_access_rule" "linux77" {
   name        = "linux77 (vwanlbip) access from Internet"
   layer       = "${checkpoint_management_package.vmss.name} Network"

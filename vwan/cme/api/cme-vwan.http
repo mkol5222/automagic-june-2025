@@ -139,13 +139,13 @@ X-chkp-sid: {{login.response.body.sid}}
       "protocol": "TCP"
     },
         {
-      "name": "web_waf",
+      "name": "web_linux69",
       "original_source": "0.0.0.0/0",
       "lb_public_ips": [
-        "20.166.17.164"
+        "4.210.72.149"
       ],
       "original_ports": [
-        "80","443","22"
+        "80","443"
       ],
       "protocol": "TCP"
     }
@@ -158,7 +158,7 @@ X-chkp-sid: {{login.response.body.sid}}
 @requestId={{setNVAInboundRulesWithWAF.response.body.result.request-id}}
 
 
-GET https://{{$dotenv CHECKPOINT_SERVER}}/web_api/cme-api/status/{{requestId}}
+GET https://{{$dotenv CHECKPOINT_SERVER}}//web_api/v1.8/cme-api/v1.2.1/status/{{requestId}}
 Content-Type: application/json
 X-chkp-sid: {{login.response.body.sid}}
 ###
