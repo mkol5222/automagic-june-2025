@@ -15,6 +15,8 @@ resource "checkpoint_management_access_layer" "layer77out" {
   #threat_prevention = false
   comments          = "Layer for vnet77"
   tags              = ["MadeByTF", "inventory"]
+
+  
 }
 
 # resource "checkpoint_management_access_rule" "layer77_rule_ingress" {
@@ -91,12 +93,13 @@ resource "checkpoint_management_access_rule" "layer77_rule_egress" {
 resource "checkpoint_management_host" "cfdns" {
     name = "cfdns"
     ipv4_address = "1.1.1.1"
+    color = "orange"
 }
 
 
 resource "checkpoint_management_access_rule" "layer77out100" {
 
-   layer       = "${checkpoint_management_access_layer.layer77out.name} Network"
+   layer       = "${checkpoint_management_access_layer.layer77out.name}"
   position =  {top = "top"} // {top = "top"} // { above = checkpoint_management_access_rule.from_net_linux.id }
   // {top = "top"} // { above = checkpoint_management_access_rule.from_net_linux.id }
 
@@ -109,11 +112,11 @@ resource "checkpoint_management_access_rule" "layer77out100" {
   destination        =[checkpoint_management_host.cfdns.id]
   destination_negate = false
 
-  service        = ["DNS","HTTPS","HTTP", "ICMP"]
+  service        = ["DNS","HTTPS","HTTP", "icmp-proto"]
   service_negate = false
 
-  action       = "Apply layer"
-  inline_layer = "${checkpoint_management_access_layer.layer77out.id}"
+  action       = "Accept"
+
 
   #   action_settings = {
   #     enable_identity_captive_portal = false
