@@ -39,3 +39,19 @@ module "vwan" {
     existing-public-ip              = ""
     new-public-ip                   = "yes"
 }
+
+module "role" {
+    source = "../role"
+
+    subscription_id = local.secrets.subscriptionId
+    tenant_id       = local.secrets.tenant
+    envId           = local.secrets.envId
+    nva-rg          = "automagic-vwan-nva-${local.secrets.envId}"
+}
+
+output "cme_client_id" {
+  value = module.role.client_id
+}
+output "cme_client_secret" {
+  value = module.role.client_secret
+}
