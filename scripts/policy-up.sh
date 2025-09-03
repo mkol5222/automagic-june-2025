@@ -13,6 +13,13 @@ else
     export TF_VAR_vwanlbip="$LB_IP"
 fi
 
+PIP=$(cd vwan/pip/; terraform output -json pip; )
+if [ -z "$PIP" ]; then
+  echo "PIP is not defined"
+else
+  export TF_VAR_vwan_waf_lbip_json="$PIP"
+fi
+
 export CHECKPOINT_SESSION_NAME="TF $(whoami) $(date) from $(hostname)"
 export CHECKPOINT_SESSION_DESCRIPTION="Terraform session description"
 

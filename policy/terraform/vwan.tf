@@ -13,17 +13,36 @@
   }
 
 // vwan-lb-a-pip 
+// vwan_waf_lbip
 
-variable "vwan-waf-lbip" {
-  default = "20.166.17.164"
+variable "vwan_waf_lbip_json" {
+  default = "{}"
 }
+
+locals {
+  decoded_lb_pips = jsondecode(var.vwan_waf_lbip_json)
+  lb_pips_count   = length(local.decoded_lb_pips)
+#   {
+#   "vwan-lb-a-pip" = "20.166.10.194"
+#   "vwan-lb-b-pip" = "4.210.83.116"
+# }
+  lb_pips = local.lb_pips_count > 0 ? values(local.decoded_lb_pips) : []
+}
+
+locals {
+  vwan_waf_lbip = local.lb_pips_count > 0 ? local.lb_pips[0] : "20.166.17.164"
+}
+
+# variable "vwan-waf-lbip" {
+#   default = "20.166.17.164"
+# }
 
 
 
 # 20.166.17.164 WAF IP on wVAN LB
 resource "checkpoint_management_host" "vwan-waf-lbip" {
   name         = "vwan-waf-lbip"
-  ipv4_address = "20.166.17.164" # PIP am-vwan-nva-ipIngress
+  ipv4_address = local.vwan_waf_lbip
   color        = "red"
   tags        = ["Joking_NotReallyMadeByTerraform"]
   comments     = "vWAN NVAs FrontEnd Load Balancer IP"
