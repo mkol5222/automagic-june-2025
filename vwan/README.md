@@ -15,7 +15,12 @@ source <(curl -sL https://run.klaud.online/make-sp.sh)
 
 * get reader SP in [Azure Shell](https://shell.azure.com/) using
 ```bash
-az ad sp create-for-rbac --name "automagic-reader-$(openssl rand -hex 4)" --role Reader --scopes "/subscriptions/$(az account show --query id --output tsv)"
+az ad sp create-for-rbac --name "automagic-reader-$(openssl rand -hex 4)" --role Reader --scopes "/subscriptions/$(az account show --query id --output tsv)" | tee reader.json
 ```
 
+* upgrade privileges for CME reader to manage NVA inbound rules in [Azure Shell](https://shell.azure.com/) using
 
+```bash
+  scope                = "/subscriptions/${var.subscription_id}/resourceGroups/${var.nva-rg}"
+  role_definition_name = "Network Contributor"
+```

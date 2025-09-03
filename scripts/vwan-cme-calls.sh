@@ -8,6 +8,25 @@ fi
 
 source ./secrets/.env-cmeapi
 
+
+# READER_SUBSCRIPTION_ID
+# NVA_RESOURCE_GROUP
+# READER_CLIENT_ID
+
+
+echo "make sure to upgrade CME READER pernissions in Azure Shell"
+
+echo az role assignment create \
+  --assignee "$READER_CLIENT_ID" \
+  --role \"Network Contributor\" \
+  --scope "/subscriptions/$READER_SUBSCRIPTION_ID/resourceGroups/$NVA_RESOURCE_GROUP"
+
+echo
+echo "press any key"
+read A
+
+
+
 # POST https://{{$dotenv CHECKPOINT_SERVER}}/web_api/login
 # Content-Type: application/json
 

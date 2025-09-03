@@ -1,0 +1,41 @@
+
+
+###
+# rules
+
+@subscriptionId={{$dotenv SUBSCRIPTION_ID}}
+@nvaRg={{$dotenv NVA_RG}}
+@nvaName={{$dotenv NVA_NAME}}
+@token={{$dotenv TOKEN}}
+
+GET https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{nvaRg}}/providers/Microsoft.Network/networkVirtualAppliances/{{nvaName}}/inboundSecurityRules/{{nvaName}}?api-version=2024-05-01
+Authorization: Bearer {{token}}
+
+
+###
+
+PUT https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{nvaRg}}/providers/Microsoft.Network/networkVirtualAppliances/{{nvaName}}/inboundSecurityRules/{{nvaName}}?api-version=2024-05-01
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "properties": {
+    "ruleType": "Permanent",
+    "rules": [
+      {
+        "name": "web_linux77",
+        "protocol": "TCP",
+        "sourceAddressPrefix": "0.0.0.0/0",
+        "destinationPortRanges": [
+          "80",
+          "443",
+          "22",
+          "8080"
+        ],
+        "appliesOn": [
+          "am-vwan-nva-ipIngress"
+        ],
+        "access": "allow"
+      }
+    ]
+    }
+}

@@ -106,13 +106,15 @@ X-chkp-sid: {{login.response.body.sid}}
   ]
 }
 
+###
+#      "details": "Failed to update ingress rules. HTTP/1.1 403 Forbidden b'{\"error\":{\"code\":\"AuthorizationFailed\",\"message\":\"The client \\'7930a1c1-788c-4be7-adc2-a9bcb6d22128\\' with object id \\'7930a1c1-788c-4be7-adc2-a9bcb6d22128\\' does not have authorization to perform action \\'Microsoft.Network/networkVirtualAppliances/inboundSecurityRules/write\\' over scope \\'/subscriptions/f4ad5e85-ec75-4321-8854-ed7eb611f61d/resourcegroups/automagic-vwan-nva-0708a60e/providers/Microsoft.Network/networkVirtualAppliances/am-vwan-nva/inboundSecurityRules/am-vwan-nva\\' or the scope is invalid. If access was recently granted, please refresh your credentials.\"}}'",
 
 ###
-# @name requestStatusInboundWAF
-@requestId={{setNVAInboundRules.response.body.result.request-id}}
+# @name setNVAInboundRulesStatus
+@setNVAInboundRulesReqId={{setNVAInboundRules.response.body.result.request-id}}
 
 
-GET https://{{$dotenv CHECKPOINT_SERVER}}/web_api/cme-api/status/{{requestId}}
+GET https://{{$dotenv CHECKPOINT_SERVER}}/web_api/cme-api/status/{{setNVAInboundRulesReqId}}
 Content-Type: application/json
 X-chkp-sid: {{login.response.body.sid}}
 ###

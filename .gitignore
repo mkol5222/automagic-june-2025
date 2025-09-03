@@ -47,3 +47,4 @@ sid.json
 tfstate.json
 vwan/api/.env
 vwan/cme/api/.env
+vwan/api/azure_handler.py
