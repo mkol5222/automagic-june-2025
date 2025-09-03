@@ -16,6 +16,7 @@ az network virtual-appliance --help
 az network virtual-appliance show --help
 
 az network virtual-appliance show --ids "$NVA_ID"
+az network virtual-appliance show --ids "$NVA_ID" --debug
 az network virtual-appliance show --ids "$NVA_ID" | jq '.|keys'
 
 az network virtual-appliance show --ids "$NVA_ID" | jq '.inboundSecurityRules'

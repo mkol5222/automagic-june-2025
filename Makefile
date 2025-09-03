@@ -120,3 +120,16 @@ vwan-spokes-down:
 vwan-cme-up:
 	./scripts/vwan-cme-api-env.sh
 	./scripts/vwan-cme-calls.sh
+vwan-fwon:
+	./scripts/vwan-fwon.sh
+vwan-fwoff:
+	./scripts/vwan-fwoff.sh
+vwan-lbrules:
+	./scripts/vwan-lbrules.sh
+vwan-lbrules-set:
+	./scripts/vwan-set-lbrules.sh
+
+vwan-lbips:
+	./scripts/vwan-lbips.sh
+vwan-fwstate:
+	./scripts/vwan-fwstate.sh

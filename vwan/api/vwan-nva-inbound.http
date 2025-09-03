@@ -39,3 +39,18 @@ Content-Type: application/json
     ]
     }
 }
+
+###
+# @name showNva
+GET https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{nvaRg}}/providers/Microsoft.Network/networkVirtualAppliances/{{nvaName}}?api-version=2023-11-01
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+@ingressIp={{showNva.response.body.properties.internetIngressPublicIps[0].id}}
+
+
+###
+# @name getIp
+GET https://management.azure.com/{{ingressIp}}?api-version=2024-05-01
+Authorization: Bearer {{token}}
