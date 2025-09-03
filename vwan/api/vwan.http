@@ -1,0 +1,37 @@
+###
+
+@subscriptionId={{$dotenv SUBSCRIPTION_ID}}
+@hubRg={{$dotenv HUB_RG}}
+@hubName={{$dotenv HUB_NAME}}
+@nvaRg={{$dotenv NVA_RG}}
+@nvaName={{$dotenv NVA_NAME}}
+@nvaId=/subscriptions/{{subscriptionId}}/resourcegroups/{{nvaRg}}/providers/Microsoft.Network/networkVirtualAppliances/{{nvaName}}
+
+# @token={{$azcli "az account get-access-token --query accessToken -o tsv"}}
+@token={{$dotenv TOKEN}}
+PUT https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{hubRg}}/providers/Microsoft.Network/virtualHubs/{{hubName}}/routingIntent/hubRoutingIntent?api-version=2023-06-01
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"name":"hubRoutingIntent",
+    "id":"/subscriptions/{{subscriptionId}}/resourceGroups/{{hubRg}}/providers/Microsoft.Network/virtualHubs/{{hubName}}/routingIntent/hubRoutingIntent",
+    "properties":{"routingPolicies":[
+        {"name":"Internet","destinations":["Internet"],"nextHop":"{{nvaId}}"},
+        {"name":"PrivateTraffic","destinations":["PrivateTraffic"],"nextHop":"{{nvaId}}"}
+    ]}}
+
+###
+
+# @name deleteRoutingIntent
+
+DELETE https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{hubRg}}/providers/Microsoft.Network/virtualHubs/{{hubName}}/routingIntent/hubRoutingIntent?api-version=2023-06-01
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# @name getRoutingIntent
+
+GET https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{hubRg}}/providers/Microsoft.Network/virtualHubs/{{hubName}}/routingIntent/hubRoutingIntent?api-version=2023-06-01
+Content-Type: application/json
+Authorization: Bearer {{token}}
