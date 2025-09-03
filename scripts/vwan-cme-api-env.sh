@@ -2,13 +2,16 @@
 
 set -eu
 
+echo "Preparing secrets/.env-cmeapi"
+
 # cat ./secrets/sp.json | jq .
 ENVID=$(cat ./secrets/sp.json | jq -r .envId)
 # cat ./secrets/reader.json | jq .
-READER_SUBSCRIPTION=$(cat ./secrets/reader.json | jq -r .subscriptionId)
+READER_SUBSCRIPTION=$(cat ./secrets/sp.json | jq -r .subscriptionId)
 READER_CLIENT_ID=$(cat ./secrets/reader.json | jq -r .appId)
 READER_TENANT_ID=$(cat ./secrets/reader.json | jq -r .tenant)
 READER_CLIENT_SECRET=$(cat ./secrets/reader.json | jq -r .password)
+
 
 # if no ./secrets/vwan-nva-sic.txt
 SICKEY=$((cd vwan; terraform output -json) | jq -r .sic_key.value)
@@ -19,7 +22,7 @@ SICKEY=$((cd vwan; terraform output -json) | jq -r .sic_key.value)
 
 # SICKEY=$(cat ./secrets/vwan-nva-sic.txt)
 SICKEYB64=$(echo -n "$SICKEY" | base64 -w0)
-echo "Encoded SIC key: $SICKEYB64"
+# echo "Encoded SIC key: $SICKEYB64"
 
 # is there management aka cpman? look for az rg named automagic-cpman-$ENVID
 if az group show --name "automagic-management-${ENVID}" > /dev/null 2>&1; then
@@ -45,12 +48,12 @@ else
   exit 1
 fi
 
-cat << EOF | tee ./secrets/.env-cmeapi
+cat << EOF > ./secrets/.env-cmeapi
 ENVID="$ENVID"
 READER_SUBSCRIPTION_ID="$READER_SUBSCRIPTION"
 READER_CLIENT_ID="$READER_CLIENT_ID"
 READER_TENANT_ID="$READER_TENANT_ID"
-READER_CLIENT_SECRET="$READER_CLIENT_SECRET"
+READER_CLIENT_SECRET='$READER_CLIENT_SECRET'
 
 NVA_AZ_ACCOUNT=myazure
 NVA_RESOURCE_GROUP="automagic-vwan-nva-${ENVID}"
@@ -61,7 +64,7 @@ NVA_SICKEY="$SICKEYB64"
 
 CHECKPOINT_SERVER="$CPMAN_IP"
 CHECKPOINT_USERNAME=admin
-CHECKPOINT_PASSWORD="$CPPASS"
+CHECKPOINT_PASSWORD='$CPPASS'
 
 LB_IP="$LB_IP"
 EOF

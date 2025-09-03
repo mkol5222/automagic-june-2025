@@ -102,14 +102,7 @@ vwan-ssh-a:
 vwan-ssh-b:
 	./scripts/vwan-ssh.sh 2
 
-vwan-spoke77:
-	./scripts/vwan-spoke77-up.sh
-vwan-spoke77-up: vwan-spoke77
 
-vwan-spoke68-up:
-	./scripts/vwan-spoke68-up.sh
-vwan-spoke68: vwan-spoke68-up
-vwan-spokes-up: vwan-spoke68-up vwan-spoke77-up
 
 waf-ssh:
 	./scripts/waf-ssh.sh
@@ -117,11 +110,13 @@ waf-ssh:
 vwan-down:
 	./scripts/vwan-down.sh
 
-vwan-spoke68-down:
-	./scripts/vwan-spoke68-down.sh
+vwan-spokes-up: vwan-spokes
+vwan-spokes:
+	./scripts/vwan-spokes-up.sh
 
+vwan-spokes-down:
+	./scripts/vwan-spokes-down.sh
 
-vwan-spoke77-down:
-	./scripts/vwan-spoke77-down.sh
-
-vwan-spokes-down: vwan-spoke68-down vwan-spoke77-down
+vwan-cme-up:
+	./scripts/vwan-cme-api-env.sh
+	./scripts/vwan-cme-calls.sh

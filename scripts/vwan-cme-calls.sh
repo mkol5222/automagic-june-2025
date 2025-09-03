@@ -17,13 +17,15 @@ source ./secrets/.env-cmeapi
 # }
 
 function login() {
-  RESP=$(curl -k -X POST "https://$CHECKPOINT_SERVER/web_api/login" \
+  local LOGIN_RESP=$(curl -k -X POST "https://$CHECKPOINT_SERVER/web_api/login" \
   -H "Content-Type: application/json" \
   -d '{
       "user": "'"$CHECKPOINT_USERNAME"'",
       "password": "'"$CHECKPOINT_PASSWORD"'"
   }' -s)
-  SID=$(echo "$RESP" | jq -r .sid)
+
+  #echo $LOGIN_RESP
+  SID=$(echo "$LOGIN_RESP" | jq -r .sid)
   # echo "$SID"
 }
 
@@ -147,13 +149,42 @@ function checkStatus() {
 }
 
 login
-# echo $SID
+# SID is null when failed
+if [ -z "$SID" ]; then
+  echo "Login failed. Check secrets/.env-cmeapi for Security Management creds."
+  exit 1
+fi
 
-deleteAccount
+#echo $SID
+#exit 0
+
+#deleteAccount
+#sleep 2
+#addAccount
+
 sleep 2
-addAccount
+ACCOUNTS=$(listAccounts)
+ACCOUNTCOUNT=$(echo "$ACCOUNTS" | jq -r '.result | length')
+# if zero addAccount
+if [ "$ACCOUNTCOUNT" -eq 0 ]; then
+  echo "No accounts found. Adding account..."
+  ADDACCRES=$(addAccount)
+  echo "$ADDACCRES" | jq .
+else
+  echo "Accounts found:"
+  echo "$ACCOUNTS" | jq .
+  echo "Updating account..."
+  SETACCRES=$(setAccount)
+  echo "$SETACCRES" | jq .
+fi
+
+ACCOUNTS2=$(listAccounts)
+echo "$ACCOUNTS2" | jq .
+
+echo "Accounts present:"
 sleep 2
 setAccount
+echo
 
 sleep 2
 listAccounts

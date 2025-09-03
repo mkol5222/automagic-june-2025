@@ -1,9 +1,9 @@
 
 output "client_id" {
-  value = azuread_application.cgns-reader.application_id
+  value = azuread_application.vwan_role
 }
 
 output "client_secret" {
-  value = azuread_application_password.cgns-reader-key.value
+  value = azuread_application_password.vwan_role.value
 }
 

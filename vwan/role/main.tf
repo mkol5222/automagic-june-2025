@@ -6,14 +6,14 @@ resource "azuread_application" "vwan_role" {
   owners       = [data.azuread_client_config.current.object_id]
 }
 
-resource "azuread_application_password" "vwan_role-key" {
+resource "azuread_application_password" "vwan_role" {
   display_name          = "automagic-vwan-cme-role-${var.envId}-password"
   end_date_relative     = "8640h" # one-year time frame
-  application_object_id = azuread_application.vwan_role.object_id
+  application_id  = azuread_application.vwan_role.object_id
 }
 
 resource "azuread_service_principal" "vwan_role-sp" {
-  client_id = azuread_application.vwan_role.application_id
+  client_id = azuread_application.vwan_role.client_id
   //application_id = azuread_application.vwan_role.object_id
   owners = [data.azuread_client_config.current.object_id]
 }

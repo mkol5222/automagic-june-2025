@@ -31,3 +31,8 @@ variable "vwan_hub_name" {
     type        = string
     # default     = "myVNetHub"
 }
+
+variable "vwan_hub_location" {
+    description = "The location of the virtual hub"
+    type        = string
+}

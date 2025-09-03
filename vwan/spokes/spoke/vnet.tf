@@ -1,13 +1,13 @@
 
 resource "azurerm_resource_group" "rg" {
   name     = var.vnet_rg
-  location = data.azurerm_virtual_hub.vwan_hub.location
+  location = var.vwan_hub_location
 }
 
 # Create Spoke VNET
 resource "azurerm_virtual_network" "spoke" {
   name                = var.vnet_name
-  location            = data.azurerm_virtual_hub.vwan_hub.location
+  location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   address_space       = [var.vnet_address]
 }
@@ -23,7 +23,7 @@ resource "azurerm_virtual_network" "spoke" {
 # Connect spoke VNET to Virtual Hub
 resource "azurerm_virtual_hub_connection" "spoke_to_hub" {
   name                      = "conn-${var.vnet_name}-to-hub"
-  virtual_hub_id            = data.azurerm_virtual_hub.vwan_hub.id
+  virtual_hub_id            = local.hub_id
   remote_virtual_network_id = azurerm_virtual_network.spoke.id
 
   internet_security_enabled = true
