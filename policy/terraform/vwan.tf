@@ -12,6 +12,14 @@
     comments     = "vWAN NVAs FrontEnd Load Balancer IP"
   }
 
+// vwan-lb-a-pip 
+
+variable "vwan-waf-lbip" {
+  default = "20.166.17.164"
+}
+
+
+
 # 20.166.17.164 WAF IP on wVAN LB
 resource "checkpoint_management_host" "vwan-waf-lbip" {
   name         = "vwan-waf-lbip"
