@@ -13,3 +13,4 @@
 - [ ] include vWAN WAF VM in deployment (waf77)
 - [ ] HTTPS on Linux in vWAN spokes
 - [ ] manage layered policy by data - layer77
+- [ ] remote VNET connected using VPN with Azure VPN gateway
