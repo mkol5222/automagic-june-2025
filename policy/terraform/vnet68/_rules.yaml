@@ -1,10 +1,10 @@
 rules:
 
-  - name: "allow DNS"
-    source: ["Any"]
-    destination: ["Any"]
-    service: ["DNS"]
-    action: "Accept"
+  # - name: "allow DNS"
+  #   source: ["Any"]
+  #   destination: ["Any"]
+  #   service: ["DNS"]
+  #   action: "Accept"
 
   # - name: "allow CFDNS ping access"
   #   source: ["linux68"]
@@ -28,10 +28,10 @@ rules:
   #   source: ["app=linux68"]
   #   destination: ["app=linux77"]
   #   service: ["Any"]
-  #   action: "Accept"
+  #   action: "Drop"
 
-  # - name: "VNET77 access"
-  #   source: ["linux68"]
-  #   destination: ["net_vnet_spoke77"]
-  #   service: ["Any"]
-  #   action: "Accept"
+  - name: "VNET77 access"
+    source: ["linux68"]
+    destination: ["net_vnet_spoke77"]
+    service: ["Any"]
+    action: "Accept"
