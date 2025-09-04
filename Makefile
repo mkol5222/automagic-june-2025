@@ -133,3 +133,9 @@ vwan-lbips:
 	./scripts/vwan-lbips.sh
 vwan-fwstate:
 	./scripts/vwan-fwstate.sh
+
+
+vwan-pip-up:
+	./scripts/vwan-pip-up.sh
+vwan-pip-down:
+	./scripts/vwan-pip-down.sh

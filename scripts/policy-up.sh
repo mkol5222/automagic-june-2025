@@ -13,7 +13,8 @@ else
     export TF_VAR_vwanlbip="$LB_IP"
 fi
 
-PIP=$(cd vwan/pip/; terraform output -json pip; )
+# if PIP ready , use it in policy
+PIP=$(cd vwan/pip/; terraform output -json pip || echo "{}"; )
 if [ -z "$PIP" ]; then
   echo "PIP is not defined"
 else
