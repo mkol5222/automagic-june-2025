@@ -11,9 +11,15 @@ rules:
     destination: ["cfdns"]
     service: ["Any"]
     action: "Accept"
-    
-  - name: "ip.iol.cz http"
+
+  # - name: "ip.iol.cz http"
+  #   source: ["linux68"]
+  #   destination: ["ip.iol.cz"]
+  #   service: ["HTTP"]
+  #   action: "Accept"
+
+  - name: "VNET77 access"
     source: ["linux68"]
-    destination: ["ip.iol.cz"]
-    service: ["HTTP"]
+    destination: ["net_vnet_spoke77"]
+    service: ["Any"]
     action: "Accept"
