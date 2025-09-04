@@ -6,20 +6,32 @@ rules:
     service: ["DNS"]
     action: "Accept"
 
-  - name: "allow CFDNS access from linux68"
-    source: ["linux68"]
-    destination: ["cfdns"]
-    service: ["Any"]
-    action: "Accept"
-
-  # - name: "ip.iol.cz http"
+  # - name: "allow CFDNS ping access"
   #   source: ["linux68"]
-  #   destination: ["ip.iol.cz"]
-  #   service: ["HTTP"]
+  #   destination: ["cfdns"]
+  #   service: ["icmp-proto"]
   #   action: "Accept"
 
-  - name: "VNET77 access"
+  - name: "allow CFDNS access from linux68"
+    source: ["app=linux68"]
+    destination: ["cfdns"]
+    service: ["HTTP","HTTPS", "icmp-proto", "DNS"]
+    action: "Accept"
+
+  - name: "ip.iol.cz http"
     source: ["linux68"]
-    destination: ["net_vnet_spoke77"]
+    destination: ["ip.iol.cz"]
+    service: ["HTTP"]
+    action: "Accept"
+
+  - name: "app=linux77 access"
+    source: ["app=linux68"]
+    destination: ["app=linux77"]
     service: ["Any"]
     action: "Accept"
+
+  # - name: "VNET77 access"
+  #   source: ["linux68"]
+  #   destination: ["net_vnet_spoke77"]
+  #   service: ["Any"]
+  #   action: "Accept"
