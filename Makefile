@@ -139,3 +139,6 @@ vwan-pip-up:
 	./scripts/vwan-pip-up.sh
 vwan-pip-down:
 	./scripts/vwan-pip-down.sh
+
+cpman-install-policy:
+	./scripts/cpman-ssh.sh mgmt_cli -r true install-policy policy-package vmss
