@@ -103,6 +103,41 @@ resource "checkpoint_management_host" "ipiolcz" {
     color = "blue"
 }
 
+resource "checkpoint_management_access_rule" "layer77outwaf" {
+
+   layer       = "${checkpoint_management_access_layer.layer77out.name}"
+  position =  {top = "top"} // {top = "top"} // { above = checkpoint_management_access_rule.from_net_linux.id }
+  // {top = "top"} // { above = checkpoint_management_access_rule.from_net_linux.id }
+
+  name = "WAF appliance connectivity"
+
+  source = [checkpoint_management_host.waf77.id]
+
+  enabled = true
+
+  destination        = ["Any"]
+  destination_negate = false
+
+  service        = ["DNS","HTTPS","HTTP", "icmp-proto"]
+  service_negate = false
+
+  action       = "Accept"
+
+
+  #   action_settings = {
+  #     enable_identity_captive_portal = false
+  #   }
+
+  track = {
+    accounting              = false
+    alert                   = "none"
+    enable_firewall_session = true
+    per_connection          = true
+    per_session             = true
+    type                    = "Log"
+  }
+}
+
 resource "checkpoint_management_access_rule" "layer77out100" {
 
    layer       = "${checkpoint_management_access_layer.layer77out.name}"
