@@ -24,11 +24,11 @@ rules:
     service: ["HTTP"]
     action: "Accept"
 
-  - name: "app=linux77 access"
-    source: ["app=linux68"]
-    destination: ["app=linux77"]
-    service: ["Any"]
-    action: "Accept"
+  # - name: "app=linux77 access"
+  #   source: ["app=linux68"]
+  #   destination: ["app=linux77"]
+  #   service: ["Any"]
+  #   action: "Accept"
 
   # - name: "VNET77 access"
   #   source: ["linux68"]
