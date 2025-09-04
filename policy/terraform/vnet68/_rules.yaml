@@ -1,0 +1,19 @@
+rules:
+
+  - name: "allow DNS"
+    source: ["Any"]
+    destination: ["Any"]
+    service: ["DNS"]
+    action: "Accept"
+
+  - name: "allow CFDNS access from linux68"
+    source: ["linux68"]
+    destination: ["cfdns"]
+    service: ["Any"]
+    action: "Accept"
+    
+  - name: "ip.iol.cz http"
+    source: ["linux68"]
+    destination: ["ip.iol.cz"]
+    service: ["HTTP"]
+    action: "Accept"
