@@ -22,7 +22,7 @@ rules:
     source: ["linux68"]
     destination: ["ip.iol.cz"]
     service: ["HTTP"]
-    action: "Accept"
+    action: "Drop"
 
   - name: "app=linux77 access"
     source: ["app=linux68"]
