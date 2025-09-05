@@ -144,3 +144,7 @@ vwan-pip-down:
 
 cpman-install-policy:
 	./scripts/cpman-ssh.sh mgmt_cli -r true install-policy policy-package vmss
+
+vnet68-policy:
+	./scripts/vnet68-policy.sh
+vnet68-update: vnet68-policy cpman-install-policy

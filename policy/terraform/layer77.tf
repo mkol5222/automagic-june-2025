@@ -54,6 +54,22 @@ resource "checkpoint_management_access_layer" "layer77out" {
 #   }
 # }
 
+
+
+// check point host CloudFlare DNS 1.1.1.1
+resource "checkpoint_management_host" "cfdns" {
+    name = "cfdns"
+    ipv4_address = "1.1.1.1"
+    color = "orange"
+}
+
+// 194.228.41.73 ip.iol.cz
+resource "checkpoint_management_host" "ipiolcz" {
+    name = "ip.iol.cz"
+    ipv4_address = "194.228.41.73"
+    color = "blue"
+}
+
 resource "checkpoint_management_access_rule" "layer77_rule_egress" {
 
    layer       = "${checkpoint_management_package.vmss.name} Network"
@@ -87,20 +103,6 @@ resource "checkpoint_management_access_rule" "layer77_rule_egress" {
     per_session             = true
     type                    = "Log"
   }
-}
-
-// check point host CloudFlare DNS 1.1.1.1
-resource "checkpoint_management_host" "cfdns" {
-    name = "cfdns"
-    ipv4_address = "1.1.1.1"
-    color = "orange"
-}
-
-// 194.228.41.73 ip.iol.cz
-resource "checkpoint_management_host" "ipiolcz" {
-    name = "ip.iol.cz"
-    ipv4_address = "194.228.41.73"
-    color = "blue"
 }
 
 resource "checkpoint_management_access_rule" "layer77outwaf" {
