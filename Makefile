@@ -89,6 +89,7 @@ linux77-ssh:
 linux68-ssh:
 	./scripts/linux68-ssh.sh
 
+vwan: vwan-up
 vwan-up:
 	./scripts/vwan-up.sh
 vwan-ssh:
@@ -135,6 +136,7 @@ vwan-fwstate:
 	./scripts/vwan-fwstate.sh
 
 
+vwan-pip: vwan-pip-up
 vwan-pip-up:
 	./scripts/vwan-pip-up.sh
 vwan-pip-down:
