@@ -13,3 +13,20 @@ resource "azurerm_virtual_hub" "automagic-hub" {
   address_prefix      = "10.0.0.0/24"
 }
   
+
+resource "azurerm_virtual_hub_route_table" "hub-default" {
+
+count = local.vmss_conn_resp_error ? 0 : 1
+
+  name           = "hub-default"
+  virtual_hub_id = azurerm_virtual_hub.automagic-hub.id
+  # labels         = ["label1"]
+
+  route {
+    name              = "default-route"
+    destinations_type = "CIDR"
+    destinations      = ["0.0.0.0/16"]
+    next_hop_type     = "ResourceId"
+    next_hop          = local.vmss_conn_id
+  }
+}

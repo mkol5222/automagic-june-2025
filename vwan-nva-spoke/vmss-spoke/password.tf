@@ -10,3 +10,8 @@ resource "random_password" "admin_password" {
     envId = local.secrets.envId
   }
 }
+
+# output "admin_password" {
+#   value     = random_password.admin_password.result
+#   sensitive = true
+# }

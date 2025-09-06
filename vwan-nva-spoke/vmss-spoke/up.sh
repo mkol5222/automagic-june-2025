@@ -21,5 +21,6 @@ fi
 export TF_VAR_sic_key="$VMSS_SIC_KEY"
 
 terraform init
+#terraform import module.linux208.azurerm_subnet_route_table_association.linux-rt-to-subnet /subscriptions/f4ad5e85-ec75-4321-8854-ed7eb611f61d/resourceGroups/automagic-vwan-vmss-spoke-aa41adff/providers/Microsoft.Network/virtualNetworks/vmss-spoke-vnet/subnets/linux
 
 terraform apply -auto-approve

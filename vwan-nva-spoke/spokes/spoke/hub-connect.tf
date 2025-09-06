@@ -10,7 +10,29 @@ resource "azurerm_virtual_hub_connection" "spoke_to_hub" {
   virtual_hub_id            = local.hub_id
   remote_virtual_network_id = local.spoke_vnet_id
 
-  internet_security_enabled = false ###
+  internet_security_enabled = true
+
+  # routing {
+
+  #   static_vnet_propagate_static_routes_enabled = true
+
+
+  #   # propagated_route_table {
+  #   #   labels = ["hub-default"]
+  #   #   # TODO validate with http resource
+  #   #   route_table_ids = ["/subscriptions/${local.azure_subscription_id}/resourceGroups/${local.hub_rg}/providers/Microsoft.Network/virtualHubs/${local.hub_name}/routeTables/hub-default"]
+
+  #   # }
+  #   # propagated_route_tables {
+  #   #   labels = ["hub-default"]
+
+  #   # }
+  #   # associated_route_tables {
+  #   #   labels = ["hub-default"]
+  #   # }
+
+    
+  # }
 }
 
 locals {

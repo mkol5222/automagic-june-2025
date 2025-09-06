@@ -86,4 +86,9 @@ az network nic list --resource-group "automagic-vwan-vmss-spoke-$(cat ../../secr
 az network nic list --resource-group "automagic-vwan-vmss-spoke-$(cat ./secrets/sp.json | jq -r .envId)" --output table
 # no nics found
 
+
+az network vhub route-table list -g automagic-vwan-hub-aa41adff --vhub-name automagic-cgns-hub-aa41adff --output table
+
+az network vhub route-table show -n defaultRouteTable -g automagic-vwan-hub-aa41adff --vhub-name automagic-cgns-hub-aa41adff | jq .
+
 ```
