@@ -25,7 +25,7 @@ count = local.vmss_conn_resp_error ? 0 : 1
   route {
     name              = "default-route"
     destinations_type = "CIDR"
-    destinations      = ["0.0.0.0/16"]
+    destinations      = ["0.0.0.0/0"]
     next_hop_type     = "ResourceId"
     next_hop          = local.vmss_conn_id
   }
