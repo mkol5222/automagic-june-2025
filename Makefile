@@ -88,6 +88,8 @@ linux77-ssh:
 	./scripts/linux77-ssh.sh
 linux68-ssh:
 	./scripts/linux68-ssh.sh
+linux208-ssh:
+	./scripts/linux208-ssh.sh
 
 vwan: vwan-up
 vwan-up:

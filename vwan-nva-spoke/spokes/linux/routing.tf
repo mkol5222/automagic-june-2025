@@ -5,12 +5,12 @@ resource "azurerm_route_table" "linux-rt" {
   #disable_bgp_route_propagation = false
 
 
-  #   route {
-  #     name                   = "to-aks"
-  #     address_prefix         = "10.68.1.0/24"
-  #     next_hop_type          = "VirtualAppliance"
-  #     next_hop_in_ip_address = "10.68.11.4"
-  #   }
+    route {
+      name                   = "to-Internet-via-hub-nva-in-spoke"
+      address_prefix         = "0.0.0.0/0"
+      next_hop_type          = "VirtualAppliance"
+      next_hop_in_ip_address = "10.208.2.4"
+    }
 
   route {
     name           = "route-to-my-pub-ip"

@@ -10,7 +10,7 @@ resource "azurerm_virtual_hub_connection" "spoke_to_hub" {
   virtual_hub_id            = local.hub_id
   remote_virtual_network_id = local.spoke_vnet_id
 
-  internet_security_enabled = false
+  internet_security_enabled = false ###
 }
 
 locals {
