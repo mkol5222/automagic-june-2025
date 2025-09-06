@@ -21,10 +21,10 @@ resource "azurerm_virtual_network" "spoke" {
 # }
 
 # Connect spoke VNET to Virtual Hub
-resource "azurerm_virtual_hub_connection" "spoke_to_hub" {
-  name                      = "conn-${var.vnet_name}-to-hub"
-  virtual_hub_id            = local.hub_id
-  remote_virtual_network_id = azurerm_virtual_network.spoke.id
+# resource "azurerm_virtual_hub_connection" "spoke_to_hub" {
+#   name                      = "conn-${var.vnet_name}-to-hub"
+#   virtual_hub_id            = local.hub_id
+#   remote_virtual_network_id = azurerm_virtual_network.spoke.id
 
-  internet_security_enabled = true
-}
+#   internet_security_enabled = true
+# }

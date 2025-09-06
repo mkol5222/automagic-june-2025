@@ -15,9 +15,9 @@ output "subscription_id" {
   value = data.azurerm_subscription.current.id
 }
 
-locals  {
-  hub_id = "${data.azurerm_subscription.current.id}/resourceGroups/${var.vwan_hub_rg}/providers/Microsoft.Network/virtualHubs/${var.vwan_hub_name}"
-}
+# locals  {
+#   hub_id = "${data.azurerm_subscription.current.id}/resourceGroups/${var.vwan_hub_rg}/providers/Microsoft.Network/virtualHubs/${var.vwan_hub_name}"
+# }
 
 output "hub_id" {
   value = local.hub_id
